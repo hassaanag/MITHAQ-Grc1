@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MITHAQ GRC</title>
+<style>
+:root{--navy:#0C2038;--gold:#C6A45D;--bg:#f4f6f9;--card:#fff;--text:#17212b;--muted:#6b7280;--line:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--navy),#17395d);color:white;padding:22px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.logo{font-size:26px;font-weight:800;letter-spacing:.5px}.sub{color:#dbe5ef;font-size:13px;margin-top:4px}
+button{border:0;border-radius:9px;padding:10px 15px;cursor:pointer;font-weight:700}
+.primary{background:var(--gold);color:var(--navy)}.ghost{background:#ffffff18;color:white;border:1px solid #ffffff35}
+.layout{display:grid;grid-template-columns:245px 1fr;min-height:calc(100vh - 84px)}
+aside{background:var(--navy);padding:18px 12px}.nav{display:block;width:100%;text-align:right;background:transparent;color:#d9e2ec;margin:5px 0}.nav.active,.nav:hover{background:#ffffff12;color:white;border-right:3px solid var(--gold)}
+main{padding:25px;max-width:1500px;width:100%;margin:auto}
+h1{margin:0 0 5px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:20px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #0c203808}
+.kpi b{font-size:29px;display:block;margin-top:7px}.gold{color:#9b7a2e}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:16px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select{padding:10px;border:1px solid var(--line);border-radius:9px;background:white}
+table{width:100%;border-collapse:collapse}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}th{background:#f8fafc}
+.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:800;background:#eef2f7}.high{background:#fee2e2;color:#991b1b}.med{background:#fef3c7;color:#92400e}.low{background:#dcfce7;color:#166534}
+section{display:none}section.active{display:block}
+.footer{margin-top:25px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{display:flex;overflow:auto;gap:5px}.nav{min-width:max-content}.grid{grid-template-columns:repeat(2,1fr)}main{padding:15px}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.logo{font-size:21px}header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+<div><div class="logo">MITHAQ GRC</div><div class="sub">منصة الحوكمة والمخاطر والالتزام</div></div>
+<div><button class="primary" onclick="exportData()">تصدير البيانات</button></div>
+</header>
+<div class="layout">
+<aside>
+<button class="nav active" data-target="dashboard">لوحة القيادة</button>
+<button class="nav" data-target="governance">الحوكمة</button>
+<button class="nav" data-target="risks">المخاطر — 95</button>
+<button class="nav" data-target="compliance">الالتزام</button>
+<button class="nav" data-target="bcm">استمرارية الأعمال</button>
+<button class="nav" data-target="audit">التدقيق والرقابة</button>
+<button class="nav" data-target="permissions">الصلاحيات</button>
+<button class="nav" data-target="reports">التقارير</button>
+</aside>
+<main>
+<section id="dashboard" class="active">
+<h1>لوحة القيادة التنفيذية</h1><div class="muted">نظرة موحدة على الحوكمة والمخاطر والالتزام</div>
+<div class="grid">
+<div class="card kpi">المخاطر المسجلة<b>95</b><span class="muted">سجل المخاطر المؤسسي</span></div>
+<div class="card kpi">مخاطر عالية<b class="gold">18</b><span class="muted">تحتاج متابعة</span></div>
+<div class="card kpi">نسبة الالتزام<b>87%</b><span class="muted">آخر تقييم</span></div>
+<div class="card kpi">التوصيات المفتوحة<b>12</b><span class="muted">تحت المعالجة</span></div>
+</div>
+<div class="panel"><h3>ملخص المجالات</h3>
+<table><tr><th>المجال</th><th>الحالة</th><th>نسبة الإنجاز</th></tr>
+<tr><td>الحوكمة</td><td><span class="badge low">مستقر</span></td><td>92%</td></tr>
+<tr><td>المخاطر</td><td><span class="badge med">متابعة</span></td><td>81%</td></tr>
+<tr><td>الالتزام</td><td><span class="badge low">جيد</span></td><td>87%</td></tr>
+<tr><td>استمرارية الأعمال</td><td><span class="badge med">تحديث مطلوب</span></td><td>76%</td></tr>
+</table></div>
+</section>
+
+<section id="governance"><h1>الحوكمة</h1><div class="panel"><div class="toolbar"><input placeholder="بحث في مواضيع الحوكمة" oninput="filterTable(this,'govTable')"><button class="primary" onclick="addRow('govTable')">+ إضافة موضوع</button></div>
+<table id="govTable"><tr><th>الرمز</th><th>الموضوع</th><th>المالك</th><th>الحالة</th></tr>
+<tr><td>GOV-001</td><td>الإطار العام للحوكمة</td><td>إدارة الحوكمة</td><td>نشط</td></tr>
+<tr><td>GOV-002</td><td>مصفوفة الصلاحيات والمسؤوليات</td><td>إدارة الحوكمة</td><td>نشط</td></tr>
+<tr><td>GOV-003</td><td>السياسات واللوائح</td><td>إدارة الحوكمة</td><td>مراجعة</td></tr>
+<tr><td>GOV-004</td><td>إدارة اللجان والقرارات</td><td>إدارة الحوكمة</td><td>نشط</td></tr>
+</table></div></section>
+
+<section id="risks"><h1>سجل المخاطر المؤسسي</h1><div class="muted">هيكل جاهز لـ95 خطراً مع بطاقات المخاطر</div><div class="panel"><div class="toolbar"><input placeholder="بحث" oninput="filterTable(this,'riskTable')"><select onchange="filterRisk(this)"><option value="">كل المستويات</option><option>عالي</option><option>متوسط</option><option>منخفض</option></select></div>
+<table id="riskTable"><tr><th>رقم</th><th>الخطر</th><th>التصنيف</th><th>المستوى</th><th>مالك الخطر</th><th>المعالجة</th></tr>
+<script>
+for(let i=1;i<=95;i++){let level=i<=18?'عالي':i<=55?'متوسط':'منخفض';let cls=level==='عالي'?'high':level==='متوسط'?'med':'low';document.write(`<tr><td>RSK-${String(i).padStart(3,'0')}</td><td>خطر مؤسسي رقم ${i}</td><td>${i%3===0?'تشغيلي':i%3===1?'استراتيجي':'امتثال'}</td><td><span class="badge ${cls}">${level}</span></td><td>الجهة المالكة</td><td>${i%2?'قيد المعالجة':'مراقبة'}</td></tr>`)}
+</script></table></div></section>
+
+<section id="compliance"><h1>الالتزام</h1><div class="panel"><div class="toolbar"><input placeholder="بحث في متطلبات الالتزام" oninput="filterTable(this,'cmpTable')"><button class="primary" onclick="addRow('cmpTable')">+ إضافة متطلب</button></div>
+<table id="cmpTable"><tr><th>الرمز</th><th>المتطلب</th><th>الدليل</th><th>الحالة</th></tr>
+<tr><td>CMP-001</td><td>حصر المتطلبات النظامية</td><td>وثيقة معتمدة</td><td>ملتزم</td></tr>
+<tr><td>CMP-002</td><td>مصفوفة الالتزام</td><td>سجل الالتزام</td><td>قيد المراجعة</td></tr>
+</table></div></section>
+
+<section id="bcm"><h1>استمرارية الأعمال</h1><div class="panel"><table><tr><th>العنصر</th><th>الحالة</th><th>نسبة الإنجاز</th></tr><tr><td>تحليل أثر الأعمال BIA</td><td>قيد التنفيذ</td><td>80%</td></tr><tr><td>خطط استمرارية الأعمال</td><td>مكتملة جزئياً</td><td>75%</td></tr><tr><td>اختبارات التعافي</td><td>مجدولة</td><td>60%</td></tr></table></div></section>
+
+<section id="audit"><h1>التدقيق والرقابة</h1><div class="panel"><table><tr><th>الرقم</th><th>الملاحظة</th><th>الأولوية</th><th>الحالة</th></tr><tr><td>AUD-001</td><td>ملاحظة رقابية نموذجية</td><td>عالية</td><td>مفتوحة</td></tr><tr><td>AUD-002</td><td>تحديث إجراء داخلي</td><td>متوسطة</td><td>قيد المعالجة</td></tr></table></div></section>
+
+<section id="permissions"><h1>الصلاحيات</h1><div class="panel"><table><tr><th>الدور</th><th>عرض</th><th>إضافة</th><th>تعديل</th><th>اعتماد</th><th>حذف</th></tr><tr><td>مدير النظام</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>مدير GRC</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>مالك الخطر</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr><tr><td>مستخدم</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></table></div></section>
+
+<section id="reports"><h1>التقارير</h1><div class="panel"><p>تقارير الحوكمة والمخاطر والالتزام واستمرارية الأعمال والتدقيق.</p><button class="primary" onclick="exportData()">تصدير تقرير CSV</button></div></section>
+<div class="footer">MITHAQ GRC — نسخة HTML تشغيلية تجريبية. البيانات المعروضة نموذجية.</div>
+</main></div>
+<script>
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.target).classList.add('active')});
+function filterTable(input,id){let q=input.value.toLowerCase();document.querySelectorAll('#'+id+' tr').forEach((r,i)=>{if(i)r.style.display=r.innerText.toLowerCase().includes(q)?'':'none'})}
+function filterRisk(sel){document.querySelectorAll('#riskTable tr').forEach((r,i)=>{if(i)r.style.display=!sel.value||r.innerText.includes(sel.value)?'':'none'})}
+function addRow(id){let t=document.getElementById(id),r=t.insertRow();for(let i=0;i<t.rows[0].cells.length;i++){let c=r.insertCell();c.contentEditable='true';c.innerText=i===0?'NEW':'بيانات جديدة'}alert('تمت إضافة صف جديد ويمكن تعديله مباشرة.')}
+function exportData(){let rows=[...document.querySelectorAll('table tr')].map(r=>[...r.cells].map(c=>c.innerText.replaceAll(',',' ')).join(','));let blob=new Blob([rows.join('\\n')],{type:'text/csv;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='MITHAQ_GRC_Report.csv';a.click()}
+</script>
+</body></html>
